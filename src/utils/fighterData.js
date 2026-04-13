@@ -1,92 +1,92 @@
+import fightPosterImage from "../images/WhatsApp Image 2026-04-10 at 09.08.37.jpeg";
+import faceOffOfficialImage from "../images/WhatsApp Image 2026-04-10 at 09.39.08.jpeg";
+import competitionPhotoImage from "../images/WhatsApp Image 2026-04-10 at 09.39.15.jpeg";
+
 export const boxerProfile = {
-  fullName: "Kouassi Mensah",
+  fullName: "DOUHADJI Ekoue",
   ringName: "BYKMTVTION",
-  title: "Boxeur professionnel & coach sportif",
+  title: "Athlete professionnel | Coach sportif certifie | Entrepreneur",
+  birthDate: "8 janvier 1997",
   location: "Lome, Togo",
-  coachProfileImage:
-    "https://images.unsplash.com/photo-1615117972428-28de67f9f2a1?w=1200&q=80",
   intro:
-    "BYKMTVTION combine performance, discipline et mentalite de champion pour accompagner sportifs, debutants et entreprises.",
+    "DOUHADJI Ekoue incarne un profil complet alliant puissance, technique et intelligence sportive.",
   biography: [
-    "Issu de la scene sportive locale, BYKMTVTION construit sa carriere sur un style explosif, une preparation rigoureuse et une forte presence communautaire.",
-    "Avec BYKMTVTION Fit Market, il partage son univers: nutrition sportive, equipements d'entrainement, accessoires de boxe et coaching personnalise.",
+    "Specialiste des sports de combat, il est reconnu pour son exigence, sa discipline et ses performances sur la scene africaine.",
+    "Fondateur de Bykmtvtion et createur de Bykmtvtion Fit Market, il place la motivation et la progression au centre de chaque action.",
   ],
+};
+
+export const brandMeaning = {
+  title: "Bykmtvtion signifie motivation",
+  description:
+    "Bykmtvtion porte une vision claire: transformer l'energie, la discipline et la determination en resultats concrets, dans le sport comme dans la vie quotidienne.",
+};
+
+export const founderJourney = {
+  sportingBackground: [
+    "Avant de se consacrer pleinement aux sports de combat, DOUHADJI Ekoue a participe a plusieurs competitions en musculation et en taekwondo.",
+    "Il effectue ensuite une transition strategique vers le MMA et la boxe thailandaise, avec une presence active en Cote d'Ivoire, au Benin, en Guinee, au Ghana et au Cameroun.",
+  ],
+  achievements: [
+    "Medaille de bronze aux 13e Jeux africains en MMA (categorie -77,1 kg)",
+    "Champion de kickboxing en Guinee - competition \"Boxer pour l'honneur\" (categorie -75 kg)",
+  ],
+  certifications: [
+    "Coach sportif certifie par la Federation Togolaise de Gymnastique (FETOGYM)",
+    "Coach sportif certifie par la Federation Togolaise de Fitness, Bodybuilding et Powerlifting (FTPBP)",
+  ],
+  coachingSpecialties: [
+    "Boxe : technique, cardio et explosivite",
+    "Renforcement musculaire : avec halteres pour tonifier et renforcer le corps",
+    "CrossFit & bodyweight : endurance, agilite et force fonctionnelle",
+    "HIIT : perte de graisse, amelioration du cardio et explosivite",
+  ],
+  association:
+    "Tresorier et coach sportif au sein du Youth Sport Club, il contribue a la gestion de l'association et a l'encadrement des jeunes talents.",
+  entrepreneurship:
+    "Fondateur de Bykmtvtion, symbole d'energie et de determination, et createur de Bykmtvtion Fit Market, espace dedie aux equipements et complements sportifs.",
+  education:
+    "Titulaire d'une Licence professionnelle en Banque Finance obtenue a l'Ecole Superieure de Gestion d'Informatique et des Sciences (ESGIS).",
+  vision:
+    "Devenir une reference incontournable dans les sports de combat et le coaching, en batissant un ecosysteme solide autour de la performance, du business sportif et de l'impact social.",
 };
 
 export const coachesTeam = [
   {
-    id: "coach-bykmtvtion",
-    name: "Kouassi Mensah",
-    role: "Head Coach - Boxe & Performance",
+    id: "coach-principal",
+    name: "DOUHADJI Ekoue",
+    role: "Fondateur & Coach principal",
     description:
-      "Coach principal BYKMTVTION Fit Market. Specialise en boxe, conditioning et accompagnement transformation physique.",
-    image:
-      "https://images.unsplash.com/photo-1615117972428-28de67f9f2a1?w=1200&q=80",
+      "Createur de Bykmtvtion et leader de Bykmtvtion Fit Market. Accompagnement base sur des methodes de haut niveau.",
+    image: fightPosterImage,
     active: true,
   },
-  {
-    id: "coach-aminata",
-    name: "Aminata Lawson",
-    role: "Coach Fitness & Transformation",
-    description:
-      "Coach dediee au renforcement musculaire, au cardio et aux programmes de transformation physique.",
-    image:
-      "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1200&q=80",
-    active: true,
-  },
-  {
-    id: "coach-slot-3",
-    name: "Coach nutrition (a venir)",
-    role: "Specialiste nutrition sportive",
-    description:
-      "Emplacement reserve pour la presentation du prochain coach nutrition BYKMTVTION Fit Market.",
-    image:
-      "https://images.unsplash.com/photo-1549570652-97324981a6fd?w=1200&q=80",
-    active: false,
-  },
-  {
-    id: "coach-slot-4",
-    name: "Coach entreprise (a venir)",
-    role: "Coaching corporate & team building",
-    description:
-      "Emplacement reserve pour un coach specialise en accompagnement des entreprises.",
-    image:
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80",
-    active: false,
-  },
-];
-
-export const achievements = [
-  "Champion regional des -75 kg (2023)",
-  "Finaliste Open West Africa Boxing (2024)",
-  "Coach de preparation physique pour athletes et entreprises",
-  "Ambassadeur de la marque BYKTMTVTION",
 ];
 
 export const fightHistory = [
   {
-    id: "fight-2026-03",
-    date: "15 mars 2026",
-    opponent: "K. Agbodan",
-    result: "Victoire - KO (Round 3)",
+    id: "mma-african-games",
+    date: "13e Jeux africains",
+    opponent: "Categorie MMA -77,1 kg",
+    result: "Medaille de bronze",
   },
   {
-    id: "fight-2025-11",
-    date: "8 novembre 2025",
-    opponent: "M. N'Dri",
-    result: "Victoire - Decision unanime",
+    id: "kickboxing-guinea",
+    date: "Boxer pour l'honneur - Guinee",
+    opponent: "Categorie kickboxing -75 kg",
+    result: "Titre de champion",
   },
   {
-    id: "fight-2025-07",
-    date: "19 juillet 2025",
-    opponent: "A. Lawson",
-    result: "Victoire - TKO (Round 5)",
+    id: "africa-circuit",
+    date: "Circuit africain",
+    opponent: "Cote d'Ivoire, Benin, Guinee, Ghana, Cameroun",
+    result: "Participation active et performances regulieres",
   },
   {
-    id: "fight-2025-02",
-    date: "22 fevrier 2025",
-    opponent: "D. Bani",
-    result: "Defaite - Decision partagee",
+    id: "mma-transition",
+    date: "Transition vers MMA & boxe thai",
+    opponent: "Preparation technique et physique",
+    result: "Progression strategique de haut niveau",
   },
 ];
 
@@ -94,82 +94,43 @@ export const gallery = [
   {
     id: "gallery-photo-1",
     type: "photo",
-    title: "Camp d'entrainement",
-    image:
-      "https://images.unsplash.com/photo-1517438476312-10d79c077509?w=1200&q=80",
+    title: "Face-off officiel",
+    image: faceOffOfficialImage,
   },
   {
     id: "gallery-photo-2",
     type: "photo",
-    title: "Preparation avant combat",
-    image:
-      "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=1200&q=80",
+    title: "Image de marque",
+    image: fightPosterImage,
   },
   {
     id: "gallery-photo-3",
     type: "photo",
-    title: "Sparring technique",
-    image:
-      "https://images.unsplash.com/photo-1517964603305-11c0f6f66012?w=1200&q=80",
-  },
-  {
-    id: "gallery-video-1",
-    type: "video",
-    title: "Highlights combat",
-    image:
-      "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1200&q=80",
-    videoUrl: "https://www.youtube.com/watch?v=4fci6D95q2o",
-  },
-  {
-    id: "gallery-video-2",
-    type: "video",
-    title: "Session cardio-boxe",
-    image:
-      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1200&q=80",
-    videoUrl: "https://www.youtube.com/watch?v=-sUKoKQlEC4",
-  },
-  {
-    id: "gallery-photo-4",
-    type: "photo",
-    title: "Travail au sac de frappe",
-    image:
-      "https://images.unsplash.com/photo-1562771242-a02d9090c90c?w=1200&q=80",
-  },
-  {
-    id: "gallery-photo-5",
-    type: "photo",
-    title: "Conditionnement physique",
-    image:
-      "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=1200&q=80",
-  },
-  {
-    id: "gallery-video-3",
-    type: "video",
-    title: "Preparation competition",
-    image:
-      "https://images.unsplash.com/photo-1518604666860-9ed391f76460?w=1200&q=80",
-    videoUrl: "https://www.youtube.com/watch?v=JfJ0_7MtRd8",
+    title: "Presence en competition",
+    image: competitionPhotoImage,
   },
 ];
 
 export const coachingPrograms = [
   {
-    id: "boxing-coaching",
-    name: "Coaching Boxe",
-    description:
-      "Technique, garde, deplacements, rythme et strategie pour progresser rapidement.",
+    id: "boxing",
+    name: "Boxe",
+    description: "Technique, cardio et explosivite.",
   },
   {
-    id: "fitness-coaching",
-    name: "Coaching Fitness",
-    description:
-      "Renforcement musculaire, cardio, endurance et prevention des blessures.",
+    id: "strength-training",
+    name: "Renforcement musculaire",
+    description: "Travail avec halteres pour tonifier et renforcer le corps.",
   },
   {
-    id: "body-transformation",
-    name: "Transformation physique",
-    description:
-      "Programme structure avec suivi hebdomadaire pour perte de gras ou prise de masse.",
+    id: "crossfit-bodyweight",
+    name: "CrossFit & bodyweight",
+    description: "Endurance, agilite et force fonctionnelle.",
+  },
+  {
+    id: "hiit",
+    name: "HIIT",
+    description: "Perte de graisse, cardio et explosivite.",
   },
 ];
 

@@ -1,4 +1,4 @@
-export const WHATSAPP_NUMBER = "22893733150";
+export const WHATSAPP_NUMBER = "22891565854";
 
 const formatPrice = (amount) => new Intl.NumberFormat("fr-FR").format(amount);
 
@@ -26,12 +26,35 @@ Nom : ${customerName}
 Merci.`;
 };
 
+export const buildCartOrderMessage = ({ items, customerName }) => {
+  const orderItems = items.filter((item) => item.quantity > 0);
+  const totalPrice = orderItems.reduce((total, item) => total + item.totalPrice, 0);
+  const orderLines = orderItems
+    .map(
+      (item) =>
+        `- ${item.productName} x${item.quantity} : ${formatPrice(item.totalPrice)} FCFA`
+    )
+    .join("\n");
+
+  return `Bonjour,
+
+Je souhaite commander les produits suivants :
+
+${orderLines}
+Total commande : ${formatPrice(totalPrice)} FCFA
+
+Nom : ${customerName}
+Merci.`;
+};
+
 export const buildCoachingMessage = ({
   fullName,
   phone,
   email,
   preferredCoach,
   coachingType,
+  coachingFormat,
+  selectedSessionPlan,
   objective,
   level,
   availability,
@@ -39,6 +62,10 @@ export const buildCoachingMessage = ({
 }) => {
   const emailLine = email ? `Email : ${email}` : "Email : Non renseigne";
   const noteLine = note ? `Message : ${note}` : "Message : Aucun message complementaire";
+  const sessionsLine =
+    selectedSessionPlan && selectedSessionPlan.trim().length > 0
+      ? `Seance choisie : ${selectedSessionPlan}`
+      : "Seance choisie : Non renseigne";
 
   return `Bonjour coach,
 
@@ -49,6 +76,8 @@ Telephone : ${phone}
 ${emailLine}
 Coach choisi : ${preferredCoach}
 Type de coaching : ${coachingType}
+Format : ${coachingFormat}
+${sessionsLine}
 Objectif : ${objective}
 Niveau : ${level}
 Disponibilite : ${availability}

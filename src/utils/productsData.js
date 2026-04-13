@@ -9,7 +9,7 @@ export const productCategories = [
   { id: "clothing", label: "Vetements", icon: "👕" },
   {
     id: "bykmtvtion-clothing",
-    label: "Vetements de la marque BYKTMTVTION",
+    label: "Vetements BYKMTVTION",
     icon: "🏷️",
   },
 ];
@@ -171,4 +171,3 @@ export const products = [
   },
 ];
 
-export const popularProducts = products.filter((product) => product.isPopular);

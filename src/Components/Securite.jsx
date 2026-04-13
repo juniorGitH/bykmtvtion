@@ -4,7 +4,7 @@ const Securite = () => {
   return (
     <div style={{ 
       padding: "clamp(0.5rem, 2vw, 3rem)",
-      paddingTop: "calc(70px + clamp(1.5rem, 4vw, 3rem))",
+      paddingTop: "calc(var(--site-nav-height) + clamp(1.5rem, 4vw, 3rem))",
       maxWidth: "1200px",
       margin: "0 auto",
       lineHeight: "1.6",

@@ -2,11 +2,41 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { coachesTeam, coachingPrograms } from "../utils/fighterData";
 import { buildCoachingMessage, openWhatsAppMessage } from "../utils/whatsapp";
+import { BRAND_BADGE, BRAND_DISPLAY } from "../utils/brand";
 
-const getCoachFallbackImage = (coachName) =>
-  `https://ui-avatars.com/api/?name=${encodeURIComponent(
-    coachName
-  )}&background=1f2937&color=f3f4f6&bold=true&size=128`;
+const coachingFormats = ["En ligne", "En presentiel"];
+const coachingSessionOptions = [
+  "Seance unique - 10 000 FCFA",
+  "1 seance / semaine - 30 000 FCFA",
+  "2 seances / semaine - 50 000 FCFA",
+  "3 seances / semaine - 70 000 FCFA",
+  "4 seances / semaine - 80 000 FCFA",
+  "5 seances / semaine - 100 000 FCFA",
+  "Coaching en groupe / entreprise - sur devis",
+];
+const tiktokVideos = [
+  {
+    id: "7627533303091940629",
+    cite: "https://www.tiktok.com/@bykmtvtion/video/7627533303091940629",
+    music:
+      "https://www.tiktok.com/music/Cardio-boxKickPower-boxmix-7426037234637474566?refer=embed",
+    musicLabel: "Cardio box_Kick_Power box_mix - Merika",
+  },
+  {
+    id: "7617462207361600788",
+    cite: "https://www.tiktok.com/@bykmtvtion/video/7617462207361600788",
+    music:
+      "https://www.tiktok.com/music/Action-Sport-7412229676418238481?refer=embed",
+    musicLabel: "Action Sport - Lux-Inspira",
+  },
+  {
+    id: "7519134167494348037",
+    cite: "https://www.tiktok.com/@bykmtvtion/video/7519134167494348037",
+    music:
+      "https://www.tiktok.com/music/The-Irishman-7096521779586058241?refer=embed",
+    musicLabel: "The Irishman - Paul Velchev",
+  },
+];
 
 const Coaching = () => {
   const location = useLocation();
@@ -17,7 +47,9 @@ const Coaching = () => {
 
   const [formData, setFormData] = useState({
     preferredCoach: availableCoaches[0]?.name || "",
-    coachingType: coachingPrograms[0]?.name || "",
+    coachingType: "Tout",
+    coachingFormat: "",
+    selectedSessionPlan: "",
     fullName: "",
     phone: "",
     email: "",
@@ -37,6 +69,31 @@ const Coaching = () => {
     }
   }, [availableCoaches, location.state]);
 
+  useEffect(() => {
+    const scriptSrc = "https://www.tiktok.com/embed.js";
+    const reloadEmbeds = () => {
+      if (typeof window.tiktokEmbedLoad === "function") {
+        window.tiktokEmbedLoad();
+      }
+    };
+    const existingScript = document.querySelector(`script[src="${scriptSrc}"]`);
+
+    if (existingScript) {
+      reloadEmbeds();
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = scriptSrc;
+    script.async = true;
+    script.onload = reloadEmbeds;
+    document.body.appendChild(script);
+
+    return () => {
+      script.onload = null;
+    };
+  }, []);
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -51,6 +108,8 @@ const Coaching = () => {
       email: formData.email.trim(),
       preferredCoach: formData.preferredCoach,
       coachingType: formData.coachingType,
+      coachingFormat: formData.coachingFormat,
+      selectedSessionPlan: formData.selectedSessionPlan,
       objective: formData.objective,
       level: formData.level,
       availability: formData.availability,
@@ -65,136 +124,162 @@ const Coaching = () => {
       <div className="max-w-7xl mx-auto space-y-10">
         <div className="text-center">
           <span className="inline-block px-4 py-2 bg-red-500/20 border border-red-500/30 rounded-full text-red-300 text-sm font-bold mb-4">
-            Coaching sportif
+            {BRAND_BADGE} {BRAND_DISPLAY}
           </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-4">
-            Programmes <span className="text-gradient-fire">personnalises</span>
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white mb-4">
+            Coaching <span className="text-gradient-fire">{BRAND_DISPLAY}</span>
           </h1>
-          <p className="text-gray-400 text-lg max-w-3xl mx-auto">
-            Inscription rapide via WhatsApp pour demarrer votre accompagnement.
+          <p className="text-gray-400 text-base sm:text-lg max-w-3xl mx-auto">
+            Chaque seance est une victoire : discipline, confiance et resultats.
+            Lance-toi maintenant, ton meilleur niveau commence aujourd'hui.
+            <a
+              href="#coaching-form"
+              className="sm:hidden inline-flex items-center justify-center ml-2 mt-2 px-4 py-2 rounded-xl bg-green-600 hover:bg-green-700 text-white font-bold text-sm"
+            >
+              S'inscris maintenant
+            </a>
           </p>
         </div>
 
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-gray-900 border border-gray-800 rounded-3xl p-6">
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+          <div className="bg-gray-900 border border-gray-800 rounded-3xl p-4 sm:p-6 min-w-0 self-start h-fit">
             <div className="mb-5 pb-4 border-b border-gray-800">
               <h2 className="text-2xl font-black text-white mb-2">
-                Choisissez votre coach
+                Videos de coaching d'experience
               </h2>
               <p className="text-gray-400 leading-relaxed">
-                Selectionnez le coach qui correspond a votre objectif avant
-                l'inscription.
+                Regardez des extraits reels de seances BYKMTVTION avant votre
+                inscription.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {availableCoaches.map((coach) => {
-                const isSelected = formData.preferredCoach === coach.name;
-
-                return (
-                  <button
-                    key={coach.id}
-                    type="button"
-                    onClick={() =>
-                      setFormData((prev) => ({
-                        ...prev,
-                        preferredCoach: coach.name,
-                      }))
-                    }
-                    className={`w-full text-left border rounded-2xl p-4 transition-all ${
-                      isSelected
-                        ? "border-red-500 bg-red-500/10 shadow-[0_0_0_1px_rgba(239,68,68,0.35)]"
-                        : "border-gray-800 bg-black/35 hover:border-red-500/40"
-                    }`}
+            <div className="space-y-4">
+              {tiktokVideos.map((video) => (
+                <div
+                  key={video.id}
+                  className="rounded-2xl border border-gray-800 bg-black/35 p-2 sm:p-3"
+                >
+                  <blockquote
+                    className="tiktok-embed"
+                    cite={video.cite}
+                    data-video-id={video.id}
+                    style={{ maxWidth: "100%", minWidth: "0", margin: 0 }}
                   >
-                    <div className="flex items-center gap-3">
-                      <img
-                        src={coach.image}
-                        alt={coach.name}
-                        className="w-16 h-16 rounded-xl object-cover border border-gray-700 bg-gray-800 shrink-0"
-                        onError={(event) => {
-                          const fallback = getCoachFallbackImage(coach.name);
-                          if (event.currentTarget.src !== fallback) {
-                            event.currentTarget.src = fallback;
-                          }
-                        }}
-                      />
-                      <div className="min-w-0">
-                        <p className="text-white font-semibold leading-tight">
-                          {coach.name}
-                        </p>
-                        <p className="text-red-300 text-xs font-semibold mt-1">
-                          {coach.role}
-                        </p>
-                      </div>
-                      {isSelected && (
-                        <span className="ml-auto text-xs px-2 py-1 rounded-full bg-red-500 text-white font-bold shrink-0">
-                          Selectionne
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-gray-400 text-sm mt-3 leading-relaxed">
-                      {coach.description}
-                    </p>
-                  </button>
-                );
-              })}
+                    <section>
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="@bykmtvtion"
+                        href="https://www.tiktok.com/@bykmtvtion?refer=embed"
+                      >
+                        @bykmtvtion
+                      </a>{" "}
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title={video.musicLabel}
+                        href={video.music}
+                      >
+                        ♬ {video.musicLabel}
+                      </a>
+                    </section>
+                  </blockquote>
+                </div>
+              ))}
             </div>
 
           </div>
 
-          <div className="bg-gray-900 border border-gray-800 rounded-3xl p-6">
+          <div
+            id="coaching-form"
+            className="bg-gray-900 border border-gray-800 rounded-3xl p-4 sm:p-6 min-w-0 self-start h-fit"
+          >
             <h2 className="text-2xl font-black text-white mb-5">
               Formulaire coaching
             </h2>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label
-                    htmlFor="preferredCoach"
-                    className="text-sm text-gray-300"
-                  >
-                    Coach choisi
-                  </label>
-                  <select
-                    id="preferredCoach"
-                    name="preferredCoach"
-                    required
-                    value={formData.preferredCoach}
-                    onChange={handleChange}
-                    className="input-field mt-1"
-                  >
-                    {availableCoaches.map((coach) => (
-                      <option key={coach.id} value={coach.name}>
-                        {coach.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+            <form onSubmit={handleSubmit} className="space-y-4 w-full min-w-0">
+              <div>
+                <label htmlFor="preferredCoach" className="text-sm text-gray-300">
+                  Coach choisi
+                </label>
+                <select
+                  id="preferredCoach"
+                  name="preferredCoach"
+                  required
+                  value={formData.preferredCoach}
+                  onChange={handleChange}
+                  className="input-field mt-1 min-w-0 max-w-full text-sm sm:text-base overflow-hidden text-ellipsis whitespace-nowrap"
+                >
+                  {availableCoaches.map((coach) => (
+                    <option key={coach.id} value={coach.name}>
+                      {coach.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-                <div>
-                  <label
-                    htmlFor="coachingType"
-                    className="text-sm text-gray-300"
-                  >
-                    Type de coaching
-                  </label>
-                  <select
-                    id="coachingType"
-                    name="coachingType"
-                    required
-                    value={formData.coachingType}
-                    onChange={handleChange}
-                    className="input-field mt-1"
-                  >
-                    {coachingPrograms.map((program) => (
-                      <option key={program.id} value={program.name}>
-                        {program.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+              <div>
+                <label htmlFor="coachingType" className="text-sm text-gray-300">
+                  Type de coaching
+                </label>
+                <select
+                  id="coachingType"
+                  name="coachingType"
+                  required
+                  value={formData.coachingType}
+                  onChange={handleChange}
+                  className="input-field mt-1 min-w-0 max-w-full text-sm sm:text-base overflow-hidden text-ellipsis whitespace-nowrap"
+                >
+                  <option value="Tout">Tout</option>
+                  {coachingPrograms.map((program) => (
+                    <option key={program.id} value={program.name}>
+                      {program.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label htmlFor="coachingFormat" className="text-sm text-gray-300">
+                  Format de coaching
+                </label>
+                <select
+                  id="coachingFormat"
+                  name="coachingFormat"
+                  required
+                  value={formData.coachingFormat}
+                  onChange={handleChange}
+                  className="input-field mt-1 min-w-0 max-w-full text-sm sm:text-base overflow-hidden text-ellipsis whitespace-nowrap"
+                >
+                  <option value="">Choisir</option>
+                  {coachingFormats.map((format) => (
+                    <option key={format} value={format}>
+                      {format}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label htmlFor="selectedSessionPlan" className="text-sm text-gray-300">
+                  Seance / formule choisie selon le tarif
+                </label>
+                <select
+                  id="selectedSessionPlan"
+                  name="selectedSessionPlan"
+                  required
+                  value={formData.selectedSessionPlan}
+                  onChange={handleChange}
+                  className="input-field mt-1 min-w-0 max-w-full text-sm sm:text-base overflow-hidden text-ellipsis whitespace-nowrap"
+                >
+                  <option value="">Choisir une option</option>
+                  {coachingSessionOptions.map((plan) => (
+                    <option key={plan} value={plan}>
+                      {plan}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div>
@@ -208,7 +293,7 @@ const Coaching = () => {
                   required
                   value={formData.fullName}
                   onChange={handleChange}
-                  className="input-field mt-1"
+                  className="input-field mt-1 min-w-0"
                 />
               </div>
 
@@ -223,7 +308,7 @@ const Coaching = () => {
                   required
                   value={formData.phone}
                   onChange={handleChange}
-                  className="input-field mt-1"
+                  className="input-field mt-1 min-w-0"
                 />
               </div>
 
@@ -237,7 +322,7 @@ const Coaching = () => {
                   type="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="input-field mt-1"
+                  className="input-field mt-1 min-w-0"
                 />
               </div>
 
@@ -253,11 +338,11 @@ const Coaching = () => {
                   value={formData.objective}
                   onChange={handleChange}
                   placeholder="Perte de poids, prise de masse, performance..."
-                  className="input-field mt-1"
+                  className="input-field mt-1 min-w-0"
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="level" className="text-sm text-gray-300">
                     Niveau
@@ -268,7 +353,7 @@ const Coaching = () => {
                     required
                     value={formData.level}
                     onChange={handleChange}
-                    className="input-field mt-1"
+                    className="input-field mt-1 min-w-0"
                   >
                     <option value="">Choisir</option>
                     <option value="Debutant">Debutant</option>
@@ -292,7 +377,7 @@ const Coaching = () => {
                     value={formData.availability}
                     onChange={handleChange}
                     placeholder="Ex: Soir en semaine"
-                    className="input-field mt-1"
+                    className="input-field mt-1 min-w-0"
                   />
                 </div>
               </div>
@@ -308,7 +393,7 @@ const Coaching = () => {
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Precisions supplementaires"
-                  className="input-field mt-1 resize-none"
+                  className="input-field mt-1 resize-none min-w-0"
                 />
               </div>
 

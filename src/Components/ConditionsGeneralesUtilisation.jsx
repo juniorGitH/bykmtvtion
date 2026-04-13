@@ -222,7 +222,9 @@ const ConditionsGeneralesUtilisation = () => {
         .cgu-container {
           padding: clamp(1rem, 3vw, 3rem);
           max-width: 900px;
+          width: 100%;
           margin: 0 auto;
+          box-sizing: border-box;
           line-height: 1.7;
           color: #2c3e50;
           background-color: #fff;
@@ -234,7 +236,7 @@ const ConditionsGeneralesUtilisation = () => {
 
         /* Espace pour le header fixe */
         .header-spacer {
-          height: 70px; /* Hauteur du header sur desktop */
+          height: var(--site-nav-height);
         }
 
         .cgu-title {
@@ -353,7 +355,7 @@ const ConditionsGeneralesUtilisation = () => {
         /* Tablettes */
         @media (max-width: 768px) {
           .header-spacer {
-            height: 60px;
+            height: var(--site-nav-height);
           }
           .cgu-container {
             padding: 1.2rem;
@@ -395,7 +397,7 @@ const ConditionsGeneralesUtilisation = () => {
         /* Mobile */
         @media (max-width: 480px) {
           .header-spacer {
-            height: 50px;
+            height: var(--site-nav-height);
           }
           .cgu-container {
             padding: 1rem;

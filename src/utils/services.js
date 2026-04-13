@@ -517,10 +517,10 @@ class ContentService {
         content: "Frip&Drip est ta destination streetwear au Togo. Des looks qui claquent, des prix qui respectent ton budget.",
       },
       contact: {
-        phone: "+228 93 73 31 50",
+        phone: "+22891565854",
         email: "contact@fripanddrip.com",
         address: "Lomé, Togo",
-        whatsapp: "22893733150"
+        whatsapp: "22891565854"
       },
     };
   }
