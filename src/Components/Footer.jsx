@@ -115,7 +115,7 @@ const SiteFooter = () => {
                   href="mailto:contact@bykmtvtion-fitmarket.com"
                   className="hover:text-red-300 transition-colors break-all"
                 >
-                  contact@bykmtvtion-fitmarket.com
+                  douhadjirinox6@gmail.com
                 </a>
               </li>
             </ul>

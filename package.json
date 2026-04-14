@@ -1,14 +1,15 @@
 {
-  "name": "educator-js-codespace-template",
+  "name": "bykmtvtion",
   "version": "1.0.0",
-  "description": "Educator JS Codespace Template",
-  "homepage": "https://e-a.codes",
+  "description": "bykmtvtion is a fitness coaching website...",
+  "homepage": "https://juniorgith.github.io/bykmtvtion/",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "start": "vite",
     "build": "vite build",
-    "build-gh": "vite build --base=/ && powershell -Command \"Copy-Item -Path dist/index.html -Destination dist/404.html\" && powershell -Command \"Set-Content -Path dist/CNAME -Value 'e-a.codes'\"",
+    
+"build-gh": "vite build && powershell -Command \"Copy-Item -Path dist/index.html -Destination dist/404.html\" && powershell -Command \"Set-Content -Path dist/CNAME -Value 'bykmtvtion.com'\"",
     "predeploy": "npm run build-gh",
     "deploy": "gh-pages -d dist",
     "test": "vitest run",
@@ -16,12 +17,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/juniorGitH/Emmanuel_Amela.git"
+    "url": "https://github.com/juniorGitH/bykmtvtion.git"
   },
   "author": "Microsoft",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/juniorGitH/Emmanuel_Amela/issues"
+    "url": "https://github.com/juniorGitH/bykmtvtion/issues"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
