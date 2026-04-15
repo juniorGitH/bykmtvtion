@@ -17,7 +17,7 @@ export const boxerProfile = {
 };
 
 export const brandMeaning = {
-  title: "Bykmtvtion signifie motivation",
+  title: "Bykmtvtion",
   description:
     "Bykmtvtion porte une vision claire: transformer l'energie, la discipline et la determination en resultats concrets, dans le sport comme dans la vie quotidienne.",
 };
