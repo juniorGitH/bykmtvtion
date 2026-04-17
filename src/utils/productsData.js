@@ -13,6 +13,10 @@ import impactCreat500g from "../images/WhatsApp Image 2026-04-16 at 21.27.50.jpe
 import minceur360 from "../images/WhatsApp Image 2026-04-16 at 21.29.37.jpeg";
 import mealReplacement from "../images/WhatsApp Image 2026-04-16 at 21.30.10.jpeg";
 import raspberryPom from "../images/WhatsApp Image 2026-04-16 at 21.32.33 (1).jpeg";
+import preThermo from "../images/WhatsApp Image 2026-04-16 at 21.36.11.jpeg";
+import bandiniEnergia from "../images/WhatsApp Image 2026-04-16 at 21.36.23.jpeg";
+import wellness from "../images/WhatsApp Image 2026-04-16 at 21.36.36.jpeg";
+import crgin from "../images/WhatsApp Image 2026-04-16 at 21.36.49.jpeg";
 
 export const productCategories = [
   { id: "boxing-accessories", label: "Accessoires de boxe", icon: "🥊" },
@@ -280,28 +284,36 @@ export const products = [
   },
   // 4. ÉNERGIE / PERFORMANCE
   {
-    id: "supp-preworkout",
+    id: "supp-pre-thermo",
     categoryId: "supp-performance",
-    name: "Pre-Workout",
-    description: "Énergie, focus, puissance.",
-    price: 28000,
-    image: "https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=900&q=80",
+    name: "the PRE-THERMO",
+    description: "Formule thermogénique avancée pour l'énergie et la concentration.",
+    price: 25000,
+    image: preThermo,
   },
   {
-    id: "supp-caffeine",
+    id: "supp-bandini-energia",
     categoryId: "supp-performance",
-    name: "Caféine naturelle",
-    description: "Énergie et concentration.",
-    price: 11000,
-    image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=900&q=80",
+    name: "BANDINI ENRGIA EXPRESS",
+    description: "Coup de boost immédiat pour vos entraînements intenses.",
+    price: 25000,
+    image: bandiniEnergia,
   },
   {
-    id: "supp-creatine-perf",
+    id: "supp-myvitamins-wellness",
     categoryId: "supp-performance",
-    name: "Creatine",
-    description: "Puissance et explosivité.",
-    price: 22000,
-    image: "https://images.unsplash.com/photo-1594882645126-14020914d58d?w=900&q=80",
+    name: "MYVITAMINES WELLNESS",
+    description: "Optimisation de la vitalité et des performances quotidiennes.",
+    price: 15000,
+    image: wellness,
+  },
+  {
+    id: "supp-myprotein-crgin",
+    categoryId: "supp-performance",
+    name: "MYPROTEIN CRIGIN",
+    description: "Soutien à la performance physique et à la puissance.",
+    price: 30000,
+    image: crgin,
   },
   // 5. RÉCUPÉRATION / ARTICULATIONS
   {
