@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Empêcher les zones inutiles (optionnel)
+Disallow: /admin
+Disallow: /private
+
+# Sitemap
+Sitemap: https://bykmtvtion.com/sitemap.xml

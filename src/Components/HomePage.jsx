@@ -32,7 +32,7 @@ const coachingVisuals = {
 };
 const coachingVisualStyles = {
   boxing: { objectPosition: "center 10%" },
-  "strength-training": { objectPosition: "center 20%" },
+  "strength-training": { objectPosition: "center 40%" },
   "crossfit-bodyweight": { objectPosition: "center 8%" },
   hiit: { objectPosition: "center 15%" },
 };
@@ -51,7 +51,7 @@ const fightVisualStyles = {
 const featuredProductIds = [
   "box-gloves-pro",
   "fitness-bands",
-  "supp-whey",
+  "supp-whey-muscle",
   "cloth-tee",
   "fitness-mat",
   "fitness-shaker",

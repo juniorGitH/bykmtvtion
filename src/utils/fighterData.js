@@ -9,7 +9,7 @@ export const boxerProfile = {
   birthDate: "8 janvier 1997",
   location: "Lome, Togo",
   intro:
-    "DOUHADJI Ekoue incarne un profil complet alliant puissance, technique et intelligence sportive.",
+    "DOUHADJI Ekoue est un coach sportif certifié, entrepreneur et athlète professionnel en MMA, engagé dans la performance et le développement du sport, et fondateur de la marque Bykmtvtion.",
   biography: [
     "Specialiste des sports de combat, il est reconnu pour son exigence, sa discipline et ses performances sur la scene africaine.",
     "Fondateur de Bykmtvtion et createur de Bykmtvtion Fit Market, il place la motivation et la progression au centre de chaque action.",
@@ -18,8 +18,7 @@ export const boxerProfile = {
 
 export const brandMeaning = {
   title: "Bykmtvtion",
-  description:
-    "Bykmtvtion porte une vision claire: transformer l'energie, la discipline et la determination en resultats concrets, dans le sport comme dans la vie quotidienne.",
+  description: "• Le symbole principal est une batterie ⚡",
 };
 
 export const founderJourney = {

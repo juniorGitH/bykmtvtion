@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Home -->
+  <url>
+    <loc>https://bykmtvtion.com/</loc>
+    <priority>1.0</priority>
+    <changefreq>daily</changefreq>
+    <lastmod>2026-04-15</lastmod>
+  </url>
+
+  <!-- Marque -->
+  <url>
+    <loc>https://bykmtvtion.com/marque</loc>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+    <lastmod>2026-04-15</lastmod>
+  </url>
+
+  <!-- Redirection (portfolio -> marque) -->
+  <!-- ❌ On ne met PAS /portfolio car c'est une redirection -->
+
+  <!-- Boutique -->
+  <url>
+    <loc>https://bykmtvtion.com/boutique</loc>
+    <priority>0.9</priority>
+    <changefreq>daily</changefreq>
+    <lastmod>2026-04-15</lastmod>
+  </url>
+
+  <!-- Coaching -->
+  <url>
+    <loc>https://bykmtvtion.com/coaching</loc>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+    <lastmod>2026-04-15</lastmod>
+  </url>
+
+  <!-- Contact -->
+  <url>
+    <loc>https://bykmtvtion.com/contact</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+    <lastmod>2026-04-15</lastmod>
+  </url>
+
+</urlset>
