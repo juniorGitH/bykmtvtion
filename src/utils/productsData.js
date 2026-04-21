@@ -46,6 +46,13 @@ import veganMultivitamins from "../images/WhatsApp Image 2026-04-16 at 21.44.36.
 import magnesiumSupp from "../images/WhatsApp Image 2026-04-16 at 21.45.53.jpeg";
 import calciumMagnesiumSupp from "../images/WhatsApp Image 2026-04-16 at 21.46.08.jpeg";
 
+// BYKMTVTION Clothing
+import tshirtByk from "../images/WhatsApp Image 2026-04-18 at 00.38.23.jpeg";
+import sauteFemme from "../images/WhatsApp Image 2026-04-18 at 00.39.08 (2).jpeg";
+import sansMancheFemme from "../images/WhatsApp Image 2026-04-18 at 00.44.41.jpeg";
+import culotteSansCollant from "../images/WhatsApp Image 2026-04-18 at 00.44.47 (1).jpeg";
+import culotteAvecCollant from "../images/WhatsApp Image 2026-04-18 at 00.44.48.jpeg";
+
 export const productCategories = [
   { id: "boxing-accessories", label: "Accessoires de boxe", icon: "🥊" },
   { id: "fitness-accessories", label: "Accessoires de fitness", icon: "💪" },
@@ -519,34 +526,44 @@ export const products = [
       "https://images.unsplash.com/photo-1598971639058-a876c7d2d5dc?w=900&q=80",
   },
   {
-    id: "cloth-tee",
+    id: "cloth-tee-byk",
     categoryId: "bykmtvtion-clothing",
-    name: "T-shirt BYKTMTVTION Fight Club",
-    description:
-      "T-shirt respirant coupe athletique, parfait pour l'entrainement et la ville.",
-    price: 15000,
-    image:
-      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=900&q=80",
+    name: "T-shirt BYKMTVTION",
+    description: "T-shirt de marque BYKMTVTION, haute qualité.",
+    price: 7000,
+    image: tshirtByk,
     isPopular: true,
   },
   {
-    id: "cloth-short",
+    id: "cloth-saute-femme",
     categoryId: "bykmtvtion-clothing",
-    name: "Short Performance BYKTMTVTION",
-    description:
-      "Short leger avec elastique de maintien et liberte de mouvement maximale.",
-    price: 19000,
-    image:
-      "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=900&q=80",
+    name: "Sauté de femme",
+    description: "Sauté de femme BYKMTVTION.",
+    price: 4000,
+    image: sauteFemme,
   },
   {
-    id: "cloth-hoodie",
+    id: "cloth-sans-manche-femme",
     categoryId: "bykmtvtion-clothing",
-    name: "Hoodie Signature BYKTMTVTION",
-    description:
-      "Hoodie premium noir, interieur brosse et logo brode pour un style athletique.",
-    price: 26000,
-    image:
-      "https://images.unsplash.com/photo-1614975058789-41316d0e2f5f?w=900&q=80",
+    name: "Sans manche de femme",
+    description: "Sans manche de femme BYKMTVTION.",
+    price: 4000,
+    image: sansMancheFemme,
+  },
+  {
+    id: "cloth-culotte-sans-collant",
+    categoryId: "bykmtvtion-clothing",
+    name: "Culotte sans collant",
+    description: "Culotte sans collant en bas BYKMTVTION.",
+    price: 4000,
+    image: culotteSansCollant,
+  },
+  {
+    id: "cloth-culotte-avec-collant",
+    categoryId: "bykmtvtion-clothing",
+    name: "Culotte avec collant",
+    description: "Culotte avec collant BYKMTVTION.",
+    price: 6000,
+    image: culotteAvecCollant,
   },
 ];

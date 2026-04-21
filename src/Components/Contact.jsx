@@ -58,41 +58,56 @@ const Contact = () => {
             <h2 className="text-2xl font-black text-white mb-5">Formulaire</h2>
 
             <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-1">
+                <label htmlFor="fullName" className="text-sm text-gray-400 ml-1">Nom complet</label>
+                <input
+                  id="fullName"
+                  name="fullName"
+                  placeholder="Nom complet"
+                  required
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  className="input-field"
+                />
+              </div>
 
-              <input
-                name="fullName"
-                placeholder="Nom complet"
-                required
-                value={formData.fullName}
-                onChange={handleChange}
-                className="input-field"
-              />
+              <div className="space-y-1">
+                <label htmlFor="phone" className="text-sm text-gray-400 ml-1">Téléphone</label>
+                <input
+                  id="phone"
+                  name="phone"
+                  placeholder="Téléphone"
+                  required
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="input-field"
+                />
+              </div>
 
-              <input
-                name="phone"
-                placeholder="Téléphone"
-                required
-                value={formData.phone}
-                onChange={handleChange}
-                className="input-field"
-              />
+              <div className="space-y-1">
+                <label htmlFor="email" className="text-sm text-gray-400 ml-1">Email (optionnel)</label>
+                <input
+                  id="email"
+                  name="email"
+                  placeholder="Email (optionnel)"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="input-field"
+                />
+              </div>
 
-              <input
-                name="email"
-                placeholder="Email (optionnel)"
-                value={formData.email}
-                onChange={handleChange}
-                className="input-field"
-              />
-
-              <textarea
-                name="message"
-                placeholder="Message"
-                required
-                value={formData.message}
-                onChange={handleChange}
-                className="input-field"
-              />
+              <div className="space-y-1">
+                <label htmlFor="message" className="text-sm text-gray-400 ml-1">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="Message"
+                  required
+                  value={formData.message}
+                  onChange={handleChange}
+                  className="input-field"
+                />
+              </div>
 
               <button
                 type="submit"

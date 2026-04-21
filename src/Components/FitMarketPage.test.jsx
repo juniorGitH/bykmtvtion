@@ -31,9 +31,9 @@ describe("FitMarketPage", () => {
     await user.click(screen.getAllByRole("button", { name: /Acheter simple/i })[0]);
 
     expect(buildProductOrderMessage).toHaveBeenCalledWith({
-      productName: "Gants Pro Impact 12oz",
+      productName: "Gants de boxe Taille 10 oz",
       quantity: 2,
-      price: 64000,
+      price: 50000,
       customerName: "Client",
     });
     expect(openWhatsAppMessage).toHaveBeenCalledWith("ORDER_MESSAGE");
@@ -50,7 +50,7 @@ describe("FitMarketPage", () => {
     await user.click(screen.getAllByRole("button", { name: /Ajouter au panier/i })[0]);
 
     expect(onAddToCart).toHaveBeenCalledWith({
-      productId: "box-gloves-pro",
+      productId: "boxing-gloves-10oz",
       quantity: 2,
     });
   });

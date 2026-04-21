@@ -18,11 +18,8 @@ describe("Coaching page", () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText(/Videos de coaching d'experience/i)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /S'inscris maintenant/i })).toHaveAttribute(
-      "href",
-      "#coaching-form"
-    );
+    expect(screen.getByText(/Vidéos de coaching/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /Formulaire coaching/i })).toBeInTheDocument();
     expect(container.querySelectorAll("blockquote.tiktok-embed")).toHaveLength(3);
   });
 
@@ -41,11 +38,11 @@ describe("Coaching page", () => {
       "2 seances / semaine - 50 000 FCFA"
     );
     await user.type(screen.getByLabelText(/Nom complet/i), "  Alice Doe  ");
-    await user.type(screen.getByLabelText(/Telephone/i), " 90001122 ");
+    await user.type(screen.getByLabelText(/T[eé]l[eé]phone/i), " 90001122 ");
     await user.type(screen.getByLabelText(/Email \(optionnel\)/i), "alice@example.com");
     await user.type(screen.getByLabelText(/Objectif/i), "Perte de poids");
     await user.selectOptions(screen.getByLabelText(/Niveau/i), "Debutant");
-    await user.type(screen.getByLabelText(/Disponibilite/i), "Soirs en semaine");
+    await user.type(screen.getByLabelText(/Disponibilit[eé]/i), "Soirs en semaine");
     await user.type(screen.getByLabelText(/^Message$/i), "  Je suis motivee  ");
 
     await user.click(screen.getByRole("button", { name: /S'inscrire via WhatsApp/i }));

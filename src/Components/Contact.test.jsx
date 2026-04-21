@@ -16,7 +16,7 @@ describe("Contact page", () => {
     render(<Contact />);
 
     await user.type(screen.getByLabelText(/Nom complet/i), "  Jean Test  ");
-    await user.type(screen.getByLabelText(/Telephone/i), " 98887766 ");
+    await user.type(screen.getByLabelText(/T[eé]l[eé]phone/i), " 98887766 ");
     await user.type(screen.getByLabelText(/Email \(optionnel\)/i), " jean@example.com ");
     await user.type(screen.getByLabelText(/^Message$/i), "  Bonjour !  ");
 

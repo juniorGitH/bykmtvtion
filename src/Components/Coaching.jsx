@@ -159,45 +159,84 @@ const Coaching = () => {
             ))}
           </div>
 
-          {/* 🧾 FORMULAIRE */}
           <div className="bg-gray-900 p-5 rounded-3xl">
-            <h2 className="text-xl text-white font-bold mb-4">
+            <h2 id="coaching-form" className="text-xl text-white font-bold mb-4">
               Formulaire coaching
             </h2>
 
             <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-1">
+                <label htmlFor="coachingFormat" className="text-sm text-gray-400 ml-1">Format de coaching</label>
+                <select id="coachingFormat" name="coachingFormat" required onChange={handleChange} className="input-field">
+                  <option value="">Choisir un format</option>
+                  {coachingFormats.map(f => <option key={f} value={f}>{f}</option>)}
+                </select>
+              </div>
 
-              <input name="fullName" placeholder="Nom complet" required onChange={handleChange} className="input-field" />
+              <div className="space-y-1">
+                <label htmlFor="selectedSessionPlan" className="text-sm text-gray-400 ml-1">Seance / formule choisie selon le tarif</label>
+                <select id="selectedSessionPlan" name="selectedSessionPlan" required onChange={handleChange} className="input-field">
+                  <option value="">Choisir une formule</option>
+                  {coachingSessionOptions.map(o => <option key={o} value={o}>{o}</option>)}
+                </select>
+              </div>
 
-              <input name="phone" placeholder="Téléphone" required onChange={handleChange} className="input-field" />
+              <div className="space-y-1">
+                <label htmlFor="fullName" className="text-sm text-gray-400 ml-1">Nom complet</label>
+                <input id="fullName" name="fullName" placeholder="Nom complet" required onChange={handleChange} className="input-field" />
+              </div>
 
-              <input name="email" placeholder="Email (optionnel)" onChange={handleChange} className="input-field" />
+              <div className="space-y-1">
+                <label htmlFor="phone" className="text-sm text-gray-400 ml-1">Téléphone</label>
+                <input id="phone" name="phone" placeholder="Téléphone" required onChange={handleChange} className="input-field" />
+              </div>
 
-              <input name="objective" placeholder="Objectif" required onChange={handleChange} className="input-field" />
+              <div className="space-y-1">
+                <label htmlFor="email" className="text-sm text-gray-400 ml-1">Email (optionnel)</label>
+                <input id="email" name="email" placeholder="Email (optionnel)" onChange={handleChange} className="input-field" />
+              </div>
 
-              <select name="level" required onChange={handleChange} className="input-field">
-                <option value="">Niveau</option>
-                <option>Debutant</option>
-                <option>Intermediaire</option>
-                <option>Avance</option>
-              </select>
+              <div className="space-y-1">
+                <label htmlFor="objective" className="text-sm text-gray-400 ml-1">Objectif</label>
+                <input id="objective" name="objective" placeholder="Objectif" required onChange={handleChange} className="input-field" />
+              </div>
 
-              <input name="availability" placeholder="Disponibilité" required onChange={handleChange} className="input-field" />
+              <div className="space-y-1">
+                <label htmlFor="level" className="text-sm text-gray-400 ml-1">Niveau</label>
+                <select id="level" name="level" required onChange={handleChange} className="input-field">
+                  <option value="">Choisir un niveau</option>
+                  <option>Debutant</option>
+                  <option>Intermediaire</option>
+                  <option>Avance</option>
+                </select>
+              </div>
 
-              {/* ✅ ANTÉCÉDENTS MÉDICAUX */}
-              <textarea
-                name="medicalHistory"
-                placeholder="Antécédents médicaux (blessures, maladies, opérations...)"
-                onChange={handleChange}
-                className="input-field"
-              />
+              <div className="space-y-1">
+                <label htmlFor="availability" className="text-sm text-gray-400 ml-1">Disponibilité</label>
+                <input id="availability" name="availability" placeholder="Disponibilité" required onChange={handleChange} className="input-field" />
+              </div>
 
-              <textarea
-                name="message"
-                placeholder="Message"
-                onChange={handleChange}
-                className="input-field"
-              />
+              <div className="space-y-1">
+                <label htmlFor="medicalHistory" className="text-sm text-gray-400 ml-1">Antécédents médicaux</label>
+                <textarea
+                  id="medicalHistory"
+                  name="medicalHistory"
+                  placeholder="Antécédents médicaux (blessures, maladies, opérations...)"
+                  onChange={handleChange}
+                  className="input-field"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label htmlFor="message" className="text-sm text-gray-400 ml-1">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="Message"
+                  onChange={handleChange}
+                  className="input-field"
+                />
+              </div>
 
               <button className="w-full bg-green-600 py-3 rounded-xl text-white font-bold">
                 S'inscrire via WhatsApp
