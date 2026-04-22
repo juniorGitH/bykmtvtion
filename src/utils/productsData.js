@@ -46,6 +46,20 @@ import veganMultivitamins from "../images/WhatsApp Image 2026-04-16 at 21.44.36.
 import magnesiumSupp from "../images/WhatsApp Image 2026-04-16 at 21.45.53.jpeg";
 import calciumMagnesiumSupp from "../images/WhatsApp Image 2026-04-16 at 21.46.08.jpeg";
 
+// Fitness Accessories Images
+import yogaMat from "../images/WhatsApp Image 2026-04-22 at 19.31.15.jpeg";
+import gantsMuscu5k from "../images/WhatsApp Image 2026-04-22 at 19.31.15 (1).jpeg";
+import gantsMuscu6k from "../images/WhatsApp Image 2026-04-22 at 19.31.16.jpeg";
+import fitnessAcc5k from "../images/WhatsApp Image 2026-04-22 at 19.31.16 (1).jpeg";
+import bandeRes3in1 from "../images/WhatsApp Image 2026-04-22 at 19.31.16 (2).jpeg";
+import bandeRes4in1 from "../images/WhatsApp Image 2026-04-22 at 19.31.16 (3).jpeg";
+import shakerHighQual from "../images/WhatsApp Image 2026-04-22 at 19.31.16 (4).jpeg";
+import genouillere from "../images/WhatsApp Image 2026-04-22 at 19.31.17.jpeg";
+import gourdeSport from "../images/WhatsApp Image 2026-04-22 at 19.31.17 (1).jpeg";
+import battleRope from "../images/WhatsApp Image 2026-04-22 at 19.31.17 (3).jpeg";
+import giletLeste from "../images/WhatsApp Image 2026-04-22 at 19.31.17 (4).jpeg";
+import sandbags from "../images/WhatsApp Image 2026-04-22 at 19.31.17 (5).jpeg";
+
 // BYKMTVTION Clothing
 import tshirtByk from "../images/WhatsApp Image 2026-04-18 at 00.38.23.jpeg";
 import sauteFemme from "../images/WhatsApp Image 2026-04-18 at 00.39.08 (2).jpeg";
@@ -114,45 +128,109 @@ export const products = [
     image: protegeDents,
   },
   {
-    id: "fitness-bands",
+    id: "fitness-yoga-mat",
     categoryId: "fitness-accessories",
-    name: "Bandes de resistance Pro Set",
-    description:
-      "Jeu de 5 niveaux de resistance pour echauffement, tonification et rehabilitation.",
-    price: 14000,
-    image:
-      "https://images.unsplash.com/photo-1591940742878-13aba4f8ec8b?w=900&q=80",
+    name: "Tapis de yoga",
+    description: "Tapis de yoga haute qualité pour vos séances de fitness et stretching.",
+    price: 10000,
+    image: yogaMat,
     isPopular: true,
   },
   {
-    id: "fitness-kettlebell",
+    id: "fitness-gloves-5k",
     categoryId: "fitness-accessories",
-    name: "Kettlebell 12kg",
-    description:
-      "Fonte gainee antiderapante pour circuits fonctionnels et travail de puissance.",
-    price: 26000,
-    image:
-      "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=900&q=80",
-  },
-  {
-    id: "fitness-mat",
-    categoryId: "fitness-accessories",
-    name: "Tapis sportif Training Grip",
-    description:
-      "Tapis haute densite pour gainage, mobilite et seances au sol en toute stabilite.",
-    price: 12000,
-    image:
-      "https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?w=900&q=80",
-  },
-  {
-    id: "fitness-shaker",
-    categoryId: "fitness-accessories",
-    name: "Shaker Sport 700ml",
-    description:
-      "Shaker resistant avec grille anti-grumeaux pour proteines et boissons d'entrainement.",
+    name: "Gants de musculation",
+    description: "Gants de musculation confortables et résistants.",
     price: 5000,
-    image:
-      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=900&q=80",
+    image: gantsMuscu5k,
+  },
+  {
+    id: "fitness-gloves-6k",
+    categoryId: "fitness-accessories",
+    name: "Gants de musculation",
+    description: "Gants de musculation premium pour une meilleure protection.",
+    price: 6000,
+    image: gantsMuscu6k,
+  },
+  {
+    id: "fitness-accessory-5k",
+    categoryId: "fitness-accessories",
+    name: "Accessoire Fitness",
+    description: "Accessoire indispensable pour vos entraînements.",
+    price: 5000,
+    image: fitnessAcc5k,
+  },
+  {
+    id: "fitness-bands-3in1",
+    categoryId: "fitness-accessories",
+    name: "Bande de Résistance 3 in one",
+    description: "Kit de 3 bandes de résistance pour divers exercices.",
+    price: 7000,
+    image: bandeRes3in1,
+  },
+  {
+    id: "fitness-bands-pro-4in1",
+    categoryId: "fitness-accessories",
+    name: "Bande de Résistance Pro Four in one",
+    description: "Kit professionnel de 4 bandes de résistance haute qualité.",
+    price: 25000,
+    image: bandeRes4in1,
+  },
+  {
+    id: "fitness-shaker-premium",
+    categoryId: "fitness-accessories",
+    name: "Shaker de haute qualité",
+    description: "Conçu pour le mélange rapide et homogène de compléments alimentaires (protéines, BCAA, créatine).",
+    price: 5000,
+    image: shakerHighQual,
+  },
+  {
+    id: "fitness-knee-support",
+    categoryId: "fitness-accessories",
+    name: "Genouillère de maintien",
+    description: "Conçue pour stabiliser l’articulation du genou lors des activités sportives. Elle offre à la fois compression, protection et confort, idéale pour prévenir les blessures et améliorer les performances.",
+    price: 10000,
+    image: genouillere,
+  },
+  {
+    id: "fitness-water-bottle",
+    categoryId: "fitness-accessories",
+    name: "Gourde de Sport",
+    description: "Gourde ergonomique pour rester hydraté pendant l'effort.",
+    price: 2500,
+    image: gourdeSport,
+  },
+  {
+    id: "fitness-knee-wraps",
+    categoryId: "fitness-accessories",
+    name: "BANDES DE GENOU / KNEE WRAPS",
+    description: "Bandes de genou pour un maintien optimal lors des charges lourdes. (5000f l'unité)",
+    price: 5000,
+    image: genouillere, // Note: Missing image (2) from src/images, using genouillere as fallback
+  },
+  {
+    id: "fitness-battle-rope",
+    categoryId: "fitness-accessories",
+    name: "Corde ondulatoire / Battle rope",
+    description: "Corde ondulatoire de haute intensité pour le cardio et la puissance.",
+    price: 40000,
+    image: battleRope,
+  },
+  {
+    id: "fitness-weighted-vest",
+    categoryId: "fitness-accessories",
+    name: "Gilet lesté",
+    description: "Gilet lesté disponible en 10kg (30000 CFA) et 5.4kg (15000 CFA).",
+    price: 30000,
+    image: giletLeste,
+  },
+  {
+    id: "fitness-sandbags",
+    categoryId: "fitness-accessories",
+    name: "Sandbags",
+    description: "Sacs de sable lestés : 5kg (20000 CFA), 10kg (32500 CFA), 15kg (42500 CFA), 20kg (55000 CFA).",
+    price: 20000,
+    image: sandbags,
   },
   // 1. PRISE DE MUSCLE
   {
