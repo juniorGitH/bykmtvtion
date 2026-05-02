@@ -6,6 +6,7 @@ import {
   buildProductOrderMessage,
   openWhatsAppMessage,
 } from "../utils/whatsapp";
+import { products } from "../utils/productsData";
 
 vi.mock("../utils/whatsapp", () => ({
   buildProductOrderMessage: vi.fn(() => "ORDER_MESSAGE"),
@@ -13,12 +14,33 @@ vi.mock("../utils/whatsapp", () => ({
 }));
 
 describe("FitMarketPage", () => {
+  it("injects SEO metadata and product structured data", () => {
+    render(<FitMarketPage />);
+
+    expect(document.title).toContain("Boutique Fit Market");
+    expect(document.querySelector('meta[name="description"]')?.getAttribute("content")).toContain(
+      "Découvrez les produits Fit Market BYKMTVTION"
+    );
+    expect(document.querySelector('meta[property="og:url"]')?.getAttribute("content")).toBe(
+      "https://bykmtvtion.com/boutique"
+    );
+
+    const jsonLdScript = document.getElementById("fit-market-products-jsonld");
+    expect(jsonLdScript).not.toBeNull();
+
+    const parsedJsonLd = JSON.parse(jsonLdScript.textContent);
+    expect(parsedJsonLd["@type"]).toBe("ItemList");
+    expect(parsedJsonLd.numberOfItems).toBe(products.length);
+  });
+
   it("filters products by category", async () => {
     const user = userEvent.setup({ delay: null });
     render(<FitMarketPage />);
 
     await user.click(screen.getByRole("button", { name: /Accessoires de fitness/i }));
-    expect(screen.getByText(/Bandes de resistance Pro Set/i)).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /Tapis de yoga/i })
+    ).toBeInTheDocument();
   });
 
   it("builds and sends a direct WhatsApp order for a selected quantity", async () => {

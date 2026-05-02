@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { productCategories, products } from "../utils/productsData";
 import {
   buildProductOrderMessage,
@@ -11,9 +11,84 @@ import {
 } from "../utils/brand";
 
 const formatPrice = (price) => new Intl.NumberFormat("fr-FR").format(price);
+const FIT_MARKET_URL = "https://bykmtvtion.com/boutique";
+const FIT_MARKET_TITLE =
+  "Boutique Fit Market | Produits Fitness, Boxe et Complements au Togo";
+const FIT_MARKET_DESCRIPTION =
+  "Découvrez les produits Fit Market BYKMTVTION : accessoires de fitness et boxe, compléments alimentaires, récupération et vêtements sport à Lomé, Togo.";
+const FIT_MARKET_KEYWORDS =
+  "fit market, produits fitness Togo, accessoires boxe Lomé, compléments alimentaires Togo, boutique sport Lomé, whey creatine Togo";
+const JSON_LD_ID = "fit-market-products-jsonld";
+
 const normalizeQuantity = (rawValue) => {
   const parsed = Number.parseInt(rawValue, 10);
   return Number.isNaN(parsed) ? 1 : Math.max(1, parsed);
+};
+
+const toAbsoluteUrl = (url) => {
+  if (!url) {
+    return FIT_MARKET_URL;
+  }
+
+  if (/^https?:\/\//i.test(url)) {
+    return url;
+  }
+
+  return `${window.location.origin}${url.startsWith("/") ? url : `/${url}`}`;
+};
+
+const upsertMetaTag = (selector, attributes, content) => {
+  let element = document.head.querySelector(selector);
+  const existed = Boolean(element);
+
+  if (!element) {
+    element = document.createElement("meta");
+    Object.entries(attributes).forEach(([name, value]) => {
+      element.setAttribute(name, value);
+    });
+    element.setAttribute("data-fit-market-seo", "true");
+    document.head.append(element);
+  }
+
+  const previousContent = element.getAttribute("content");
+  element.setAttribute("content", content);
+
+  return { element, existed, previousContent };
+};
+
+const upsertCanonicalLink = (href) => {
+  let element = document.head.querySelector('link[rel="canonical"]');
+  const existed = Boolean(element);
+
+  if (!element) {
+    element = document.createElement("link");
+    element.setAttribute("rel", "canonical");
+    element.setAttribute("data-fit-market-seo", "true");
+    document.head.append(element);
+  }
+
+  const previousHref = element.getAttribute("href");
+  element.setAttribute("href", href);
+
+  return { element, existed, previousHref };
+};
+
+const upsertJsonLdScript = (jsonLdContent) => {
+  let element = document.getElementById(JSON_LD_ID);
+  const existed = Boolean(element);
+
+  if (!element) {
+    element = document.createElement("script");
+    element.setAttribute("type", "application/ld+json");
+    element.setAttribute("id", JSON_LD_ID);
+    element.setAttribute("data-fit-market-seo", "true");
+    document.head.append(element);
+  }
+
+  const previousContent = element.textContent;
+  element.textContent = jsonLdContent;
+
+  return { element, existed, previousContent };
 };
 
 const FitMarketPage = ({ onAddToCart = () => {} }) => {
@@ -21,11 +96,133 @@ const FitMarketPage = ({ onAddToCart = () => {} }) => {
   const [quantities, setQuantities] = useState(
     Object.fromEntries(products.map((product) => [product.id, 1]))
   );
+  const categoryLabelById = useMemo(
+    () => Object.fromEntries(productCategories.map((category) => [category.id, category.label])),
+    []
+  );
 
   const filteredProducts = useMemo(
     () => products.filter((product) => product.categoryId === activeCategory),
     [activeCategory]
   );
+
+  useEffect(() => {
+    const previousTitle = document.title;
+    document.title = FIT_MARKET_TITLE;
+
+    const metaSnapshots = [
+      upsertMetaTag(
+        'meta[name="description"]',
+        { name: "description" },
+        FIT_MARKET_DESCRIPTION
+      ),
+      upsertMetaTag(
+        'meta[name="keywords"]',
+        { name: "keywords" },
+        FIT_MARKET_KEYWORDS
+      ),
+      upsertMetaTag('meta[property="og:title"]', { property: "og:title" }, FIT_MARKET_TITLE),
+      upsertMetaTag(
+        'meta[property="og:description"]',
+        { property: "og:description" },
+        FIT_MARKET_DESCRIPTION
+      ),
+      upsertMetaTag(
+        'meta[property="og:url"]',
+        { property: "og:url" },
+        FIT_MARKET_URL
+      ),
+      upsertMetaTag(
+        'meta[property="og:image"]',
+        { property: "og:image" },
+        toAbsoluteUrl(products[0]?.image)
+      ),
+      upsertMetaTag(
+        'meta[name="twitter:title"]',
+        { name: "twitter:title" },
+        FIT_MARKET_TITLE
+      ),
+      upsertMetaTag(
+        'meta[name="twitter:description"]',
+        { name: "twitter:description" },
+        FIT_MARKET_DESCRIPTION
+      ),
+      upsertMetaTag(
+        'meta[name="twitter:image"]',
+        { name: "twitter:image" },
+        toAbsoluteUrl(products[0]?.image)
+      ),
+    ];
+    const canonicalSnapshot = upsertCanonicalLink(FIT_MARKET_URL);
+
+    const productsItemListSchema = {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: `Catalogue produits ${BRAND_DISPLAY} Fit Market`,
+      inLanguage: "fr",
+      url: FIT_MARKET_URL,
+      numberOfItems: products.length,
+      itemListElement: products.map((product, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "Product",
+          name: product.name,
+          sku: product.id,
+          description: product.description,
+          image: toAbsoluteUrl(product.image),
+          category: categoryLabelById[product.categoryId] || "Produit fitness",
+          brand: {
+            "@type": "Brand",
+            name: `${BRAND_DISPLAY} Fit Market`,
+          },
+          offers: {
+            "@type": "Offer",
+            url: `${FIT_MARKET_URL}#${product.id}`,
+            priceCurrency: "XOF",
+            price: product.price,
+            availability: "https://schema.org/InStock",
+          },
+        },
+      })),
+    };
+    const jsonLdSnapshot = upsertJsonLdScript(
+      JSON.stringify(productsItemListSchema)
+    );
+
+    return () => {
+      document.title = previousTitle;
+
+      metaSnapshots.forEach(({ element, existed, previousContent }) => {
+        if (existed) {
+          if (previousContent === null) {
+            element.removeAttribute("content");
+          } else {
+            element.setAttribute("content", previousContent);
+          }
+          return;
+        }
+
+        element.remove();
+      });
+
+      if (canonicalSnapshot.existed) {
+        if (canonicalSnapshot.previousHref === null) {
+          canonicalSnapshot.element.removeAttribute("href");
+        } else {
+          canonicalSnapshot.element.setAttribute("href", canonicalSnapshot.previousHref);
+        }
+      } else {
+        canonicalSnapshot.element.remove();
+      }
+
+      if (jsonLdSnapshot.existed) {
+        jsonLdSnapshot.element.textContent = jsonLdSnapshot.previousContent;
+      } else {
+        jsonLdSnapshot.element.remove();
+      }
+    };
+  }, [categoryLabelById]);
 
   const handleQuantityChange = (productId, rawValue) => {
     const quantity = normalizeQuantity(rawValue);
@@ -67,6 +264,16 @@ const FitMarketPage = ({ onAddToCart = () => {} }) => {
             {BRAND_PROMISE}
           </p>
         </div>
+        <section className="mb-8 rounded-2xl border border-gray-800 bg-gray-900/60 p-5">
+          <h2 className="text-xl sm:text-2xl font-bold text-white">
+            Produits fitness, boxe et compléments alimentaires au Togo
+          </h2>
+          <p className="text-gray-300 mt-2 text-sm sm:text-base">
+            Fit Market regroupe une sélection d&apos;accessoires de sport, de nutrition
+            sportive et de vêtements BYKMTVTION pour vos entraînements à Lomé et partout
+            au Togo.
+          </p>
+        </section>
 
         <div className="mb-8 rounded-2xl border border-orange-500/30 bg-gray-900/70 p-5">
           <p className="text-xs uppercase tracking-[0.18em] text-orange-300 font-bold">
@@ -101,13 +308,16 @@ const FitMarketPage = ({ onAddToCart = () => {} }) => {
 
             return (
               <article
+                id={product.id}
                 key={product.id}
                 className="group bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-red-500/40 transition-all"
               >
                 <div className="aspect-[4/3] overflow-hidden">
                   <img
                     src={product.image}
-                    alt={product.name}
+                    alt={`${product.name} - ${categoryLabelById[product.categoryId] || "Produit"}`}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
