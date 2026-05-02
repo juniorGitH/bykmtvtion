@@ -33,6 +33,20 @@ describe("FitMarketPage", () => {
     expect(parsedJsonLd.numberOfItems).toBe(products.length);
   });
 
+  it("injects product-specific SEO metadata on a product URL context", () => {
+    render(<FitMarketPage focusedProductId="boxing-gloves-10oz" />);
+
+    expect(document.title).toContain("Gants de boxe Taille 10 oz");
+    expect(document.querySelector('link[rel="canonical"]')?.getAttribute("href")).toBe(
+      "https://bykmtvtion.com/boutique/produit/boxing-gloves-10oz"
+    );
+
+    const jsonLdScript = document.getElementById("fit-market-products-jsonld");
+    const parsedJsonLd = JSON.parse(jsonLdScript.textContent);
+    expect(parsedJsonLd["@type"]).toBe("Product");
+    expect(parsedJsonLd.sku).toBe("boxing-gloves-10oz");
+  });
+
   it("filters products by category", async () => {
     const user = userEvent.setup({ delay: null });
     render(<FitMarketPage />);

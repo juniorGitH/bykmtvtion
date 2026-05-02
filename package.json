@@ -7,9 +7,9 @@
   "scripts": {
     "dev": "vite",
     "start": "vite",
-    "build": "vite build",
-    
-"build-gh": "vite build && powershell -Command \"Copy-Item -Path dist/index.html -Destination dist/404.html\" && powershell -Command \"Set-Content -Path dist/CNAME -Value 'bykmtvtion.com'\"",
+    "generate:seo": "node scripts/generate-seo-files.cjs",
+    "build": "npm run generate:seo && vite build",
+    "build-gh": "npm run build && powershell -Command \"Copy-Item -Path dist/index.html -Destination dist/404.html\" && powershell -Command \"Set-Content -Path dist/CNAME -Value 'bykmtvtion.com'\"",
     "predeploy": "npm run build-gh",
     "deploy": "gh-pages -d dist",
     "test": "vitest run",

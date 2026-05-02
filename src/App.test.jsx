@@ -25,6 +25,13 @@ describe("App routing integration", () => {
     expect(await screen.findByText(/Parcours sportif/i)).toBeInTheDocument();
   });
 
+  it("renders a product route in fit market", async () => {
+    renderAtPath("/boutique/produit/boxing-gloves-10oz");
+    expect(
+      await screen.findByRole("heading", { name: /Gants de boxe Taille 10 oz/i })
+    ).toBeInTheDocument();
+  });
+
   it("falls back to home for unknown paths", async () => {
     renderAtPath("/route-inconnue");
     expect(await screen.findByRole("link", { name: /Explorer BYKMTVTION/i })).toBeInTheDocument();

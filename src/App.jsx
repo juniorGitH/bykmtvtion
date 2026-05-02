@@ -4,7 +4,13 @@
  */
 
 import React, { useMemo, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  useParams,
+} from "react-router-dom";
 
 // Components
 import NavMenu from "./Components/NavMenu";
@@ -51,6 +57,17 @@ const Layout = ({
       <SiteFooter />
     </div>
   );
+};
+
+const FitMarketProductRoute = ({ onAddToCart }) => {
+  const { productId } = useParams();
+  const productExists = products.some((product) => product.id === productId);
+
+  if (!productExists) {
+    return <Navigate to="/boutique" replace />;
+  }
+
+  return <FitMarketPage onAddToCart={onAddToCart} focusedProductId={productId} />;
 };
 
 const App = () => {
@@ -148,6 +165,14 @@ const App = () => {
           element={
             <Layout {...layoutProps}>
               <FitMarketPage onAddToCart={handleAddToCart} />
+            </Layout>
+          }
+        />
+        <Route
+          path="/boutique/produit/:productId"
+          element={
+            <Layout {...layoutProps}>
+              <FitMarketProductRoute onAddToCart={handleAddToCart} />
             </Layout>
           }
         />

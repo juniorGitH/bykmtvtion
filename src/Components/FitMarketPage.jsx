@@ -36,6 +36,8 @@ const toAbsoluteUrl = (url) => {
 
   return `${window.location.origin}${url.startsWith("/") ? url : `/${url}`}`;
 };
+const buildProductPath = (productId) => `/boutique/produit/${encodeURIComponent(productId)}`;
+const buildProductUrl = (productId) => `${FIT_MARKET_URL}/produit/${encodeURIComponent(productId)}`;
 
 const upsertMetaTag = (selector, attributes, content) => {
   let element = document.head.querySelector(selector);
@@ -91,8 +93,14 @@ const upsertJsonLdScript = (jsonLdContent) => {
   return { element, existed, previousContent };
 };
 
-const FitMarketPage = ({ onAddToCart = () => {} }) => {
-  const [activeCategory, setActiveCategory] = useState(productCategories[0].id);
+const FitMarketPage = ({ onAddToCart = () => {}, focusedProductId = null }) => {
+  const focusedProduct = useMemo(
+    () => products.find((product) => product.id === focusedProductId) || null,
+    [focusedProductId]
+  );
+  const [activeCategory, setActiveCategory] = useState(
+    focusedProduct?.categoryId || productCategories[0].id
+  );
   const [quantities, setQuantities] = useState(
     Object.fromEntries(products.map((product) => [product.id, 1]))
   );
@@ -101,93 +109,152 @@ const FitMarketPage = ({ onAddToCart = () => {} }) => {
     []
   );
 
-  const filteredProducts = useMemo(
-    () => products.filter((product) => product.categoryId === activeCategory),
-    [activeCategory]
-  );
+  const filteredProducts = useMemo(() => {
+    if (focusedProduct) {
+      return [focusedProduct];
+    }
+
+    return products.filter((product) => product.categoryId === activeCategory);
+  }, [activeCategory, focusedProduct]);
+
+  const seoContext = useMemo(() => {
+    if (!focusedProduct) {
+      return {
+        title: FIT_MARKET_TITLE,
+        description: FIT_MARKET_DESCRIPTION,
+        keywords: FIT_MARKET_KEYWORDS,
+        canonicalUrl: FIT_MARKET_URL,
+        socialImage: toAbsoluteUrl(products[0]?.image),
+        structuredData: {
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: `Catalogue produits ${BRAND_DISPLAY} Fit Market`,
+          inLanguage: "fr",
+          url: FIT_MARKET_URL,
+          numberOfItems: products.length,
+          itemListElement: products.map((product, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            item: {
+              "@type": "Product",
+              name: product.name,
+              sku: product.id,
+              description: product.description,
+              image: toAbsoluteUrl(product.image),
+              category: categoryLabelById[product.categoryId] || "Produit fitness",
+              brand: {
+                "@type": "Brand",
+                name: `${BRAND_DISPLAY} Fit Market`,
+              },
+              offers: {
+                "@type": "Offer",
+                url: buildProductUrl(product.id),
+                priceCurrency: "XOF",
+                price: product.price,
+                availability: "https://schema.org/InStock",
+              },
+            },
+          })),
+        },
+      };
+    }
+
+    const categoryLabel =
+      categoryLabelById[focusedProduct.categoryId] || "Produits de sport";
+    const productUrl = buildProductUrl(focusedProduct.id);
+    const productDescription = `${focusedProduct.name} disponible sur Fit Market BYKMTVTION (${categoryLabel}) au prix de ${formatPrice(focusedProduct.price)} FCFA. Livraison et commande via WhatsApp au Togo.`;
+
+    return {
+      title: `${focusedProduct.name} | Fit Market BYKMTVTION`,
+      description: productDescription,
+      keywords: `${focusedProduct.name}, ${categoryLabel}, Fit Market, BYKMTVTION, boutique sport Togo`,
+      canonicalUrl: productUrl,
+      socialImage: toAbsoluteUrl(focusedProduct.image),
+      structuredData: {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        name: focusedProduct.name,
+        sku: focusedProduct.id,
+        description: focusedProduct.description,
+        image: toAbsoluteUrl(focusedProduct.image),
+        category: categoryLabel,
+        brand: {
+          "@type": "Brand",
+          name: `${BRAND_DISPLAY} Fit Market`,
+        },
+        offers: {
+          "@type": "Offer",
+          url: productUrl,
+          priceCurrency: "XOF",
+          price: focusedProduct.price,
+          availability: "https://schema.org/InStock",
+        },
+      },
+    };
+  }, [categoryLabelById, focusedProduct]);
+
+  useEffect(() => {
+    if (!focusedProduct) {
+      return;
+    }
+
+    setActiveCategory(focusedProduct.categoryId);
+  }, [focusedProduct]);
 
   useEffect(() => {
     const previousTitle = document.title;
-    document.title = FIT_MARKET_TITLE;
+    document.title = seoContext.title;
 
     const metaSnapshots = [
       upsertMetaTag(
         'meta[name="description"]',
         { name: "description" },
-        FIT_MARKET_DESCRIPTION
+        seoContext.description
       ),
       upsertMetaTag(
         'meta[name="keywords"]',
         { name: "keywords" },
-        FIT_MARKET_KEYWORDS
+        seoContext.keywords
       ),
-      upsertMetaTag('meta[property="og:title"]', { property: "og:title" }, FIT_MARKET_TITLE),
+      upsertMetaTag(
+        'meta[property="og:title"]',
+        { property: "og:title" },
+        seoContext.title
+      ),
       upsertMetaTag(
         'meta[property="og:description"]',
         { property: "og:description" },
-        FIT_MARKET_DESCRIPTION
+        seoContext.description
       ),
       upsertMetaTag(
         'meta[property="og:url"]',
         { property: "og:url" },
-        FIT_MARKET_URL
+        seoContext.canonicalUrl
       ),
       upsertMetaTag(
         'meta[property="og:image"]',
         { property: "og:image" },
-        toAbsoluteUrl(products[0]?.image)
+        seoContext.socialImage
       ),
       upsertMetaTag(
         'meta[name="twitter:title"]',
         { name: "twitter:title" },
-        FIT_MARKET_TITLE
+        seoContext.title
       ),
       upsertMetaTag(
         'meta[name="twitter:description"]',
         { name: "twitter:description" },
-        FIT_MARKET_DESCRIPTION
+        seoContext.description
       ),
       upsertMetaTag(
         'meta[name="twitter:image"]',
         { name: "twitter:image" },
-        toAbsoluteUrl(products[0]?.image)
+        seoContext.socialImage
       ),
     ];
-    const canonicalSnapshot = upsertCanonicalLink(FIT_MARKET_URL);
-
-    const productsItemListSchema = {
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      name: `Catalogue produits ${BRAND_DISPLAY} Fit Market`,
-      inLanguage: "fr",
-      url: FIT_MARKET_URL,
-      numberOfItems: products.length,
-      itemListElement: products.map((product, index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        item: {
-          "@type": "Product",
-          name: product.name,
-          sku: product.id,
-          description: product.description,
-          image: toAbsoluteUrl(product.image),
-          category: categoryLabelById[product.categoryId] || "Produit fitness",
-          brand: {
-            "@type": "Brand",
-            name: `${BRAND_DISPLAY} Fit Market`,
-          },
-          offers: {
-            "@type": "Offer",
-            url: `${FIT_MARKET_URL}#${product.id}`,
-            priceCurrency: "XOF",
-            price: product.price,
-            availability: "https://schema.org/InStock",
-          },
-        },
-      })),
-    };
+    const canonicalSnapshot = upsertCanonicalLink(seoContext.canonicalUrl);
     const jsonLdSnapshot = upsertJsonLdScript(
-      JSON.stringify(productsItemListSchema)
+      JSON.stringify(seoContext.structuredData)
     );
 
     return () => {
@@ -222,7 +289,7 @@ const FitMarketPage = ({ onAddToCart = () => {} }) => {
         jsonLdSnapshot.element.remove();
       }
     };
-  }, [categoryLabelById]);
+  }, [seoContext]);
 
   const handleQuantityChange = (productId, rawValue) => {
     const quantity = normalizeQuantity(rawValue);
@@ -274,6 +341,16 @@ const FitMarketPage = ({ onAddToCart = () => {} }) => {
             au Togo.
           </p>
         </section>
+        {focusedProduct ? (
+          <div className="mb-8">
+            <a
+              href="/boutique"
+              className="inline-block text-sm font-semibold text-orange-300 hover:text-orange-200"
+            >
+              ← Retour à toute la boutique
+            </a>
+          </div>
+        ) : null}
 
         <div className="mb-8 rounded-2xl border border-orange-500/30 bg-gray-900/70 p-5">
           <p className="text-xs uppercase tracking-[0.18em] text-orange-300 font-bold">
@@ -324,7 +401,12 @@ const FitMarketPage = ({ onAddToCart = () => {} }) => {
 
                 <div className="p-5">
                   <h2 className="text-lg sm:text-xl font-bold text-white">
-                    {product.name}
+                    <a
+                      href={buildProductPath(product.id)}
+                      className="hover:text-orange-300 transition-colors"
+                    >
+                      {product.name}
+                    </a>
                   </h2>
                   <p className="text-gray-400 text-sm mt-2 mb-4">
                     {product.description}
